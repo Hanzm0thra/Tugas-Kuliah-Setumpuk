@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel target="15">
+      <module name="Java15Preview" target="15" />
+      <module name="Kuliah" target="15" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

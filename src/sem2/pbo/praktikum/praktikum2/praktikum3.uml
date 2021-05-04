@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="0.0" y="571.0">sem2.pbo.praktikum.praktikum3.MahasiswaSystem</node>
+    <node x="0.0" y="429.0">sem2.pbo.praktikum.praktikum3.MahasiswaApp</node>
+    <node x="0.0" y="0.0">sem2.pbo.praktikum.praktikum3.DatabaseMahasiswa</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="1.0" x="242.0" y="323.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

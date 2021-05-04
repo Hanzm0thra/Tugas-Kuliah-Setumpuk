@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="0.0" y="193.0">sem2.pbo.tugas5.KaryawanTidakTetap</node>
+    <node x="226.20370370370372" y="0.0">sem2.pbo.tugas5.Karyawan</node>
+    <node x="273.45833333333337" y="765.0">sem2.pbo.tugas5.KaryawanMain</node>
+    <node x="248.78240740740745" y="540.0">sem2.pbo.tugas5.KaryawanPejabat</node>
+    <node x="343.875" y="270.0">sem2.pbo.tugas5.KaryawanTetap</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="sem2.pbo.tugas5.KaryawanMain" target="sem2.pbo.tugas5.KaryawanPejabat">
+      <point x="-22.333333333333314" y="-48.5" />
+      <point x="385.12500000000006" y="725.0" />
+      <point x="320.28240740740745" y="725.0" />
+      <point x="-71.5" y="82.5" />
+    </edge>
+    <edge source="sem2.pbo.tugas5.KaryawanTetap" target="sem2.pbo.tugas5.Karyawan">
+      <point x="-68.5" y="-71.5" />
+      <point x="412.375" y="173.0" />
+      <point x="378.7037037037037" y="173.0" />
+      <point x="30.5" y="71.5" />
+    </edge>
+    <edge source="sem2.pbo.tugas5.KaryawanPejabat" target="sem2.pbo.tugas5.KaryawanTetap">
+      <point x="71.49999999999994" y="-82.5" />
+      <point x="463.2824074074074" y="515.0" />
+      <point x="446.625" y="515.0" />
+      <point x="-34.25" y="71.5" />
+    </edge>
+    <edge source="sem2.pbo.tugas5.KaryawanMain" target="sem2.pbo.tugas5.KaryawanTidakTetap">
+      <point x="-111.66666666666663" y="-48.5" />
+      <point x="295.79166666666674" y="745.0" />
+      <point x="161.03240740740745" y="745.0" />
+      <point x="161.03240740740745" y="515.0" />
+      <point x="76.0" y="515.0" />
+      <point x="-76.0" y="148.5" />
+    </edge>
+    <edge source="sem2.pbo.tugas5.KaryawanMain" target="sem2.pbo.tugas5.KaryawanTetap">
+      <point x="111.66666666666661" y="-48.5" />
+      <point x="519.125" y="745.0" />
+      <point x="556.2824074074074" y="745.0" />
+      <point x="556.2824074074074" y="515.0" />
+      <point x="583.625" y="515.0" />
+      <point x="102.75" y="71.5" />
+    </edge>
+    <edge source="sem2.pbo.tugas5.KaryawanTidakTetap" target="sem2.pbo.tugas5.Karyawan">
+      <point x="76.0" y="-148.5" />
+      <point x="228.0" y="173.0" />
+      <point x="317.7037037037037" y="173.0" />
+      <point x="-30.5" y="71.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="445.75" y="336.5" />
+  <SelectedNodes>
+    <node>sem2.pbo.tugas5.KaryawanTidakTetap</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Methods</Category>
+    <Category>Inner Classes</Category>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

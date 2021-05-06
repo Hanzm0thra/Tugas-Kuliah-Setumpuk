@@ -34,9 +34,9 @@ public class Barang {
         return hargabarang;
     }
 
-    public static String currencyFormatting(int price) {
+    public static String currencyFormatting(int harga) {
         String result = "";
-        char[] separated = String.valueOf(price).toCharArray();
+        char[] separated = String.valueOf(harga).toCharArray();
         int index = separated.length - 1;
         int counter = 1;
 

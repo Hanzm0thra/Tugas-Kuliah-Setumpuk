@@ -1,4 +1,4 @@
-package sem2.pbo.projectakhir.movie.app.core.data.login;
+package sem2.pbo.projectakhir.movie.app.core.data.user;
 
 import sem2.pbo.projectakhir.movie.app.util.TypeOfUser;
 

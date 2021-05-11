@@ -1,10 +1,9 @@
-package sem2.pbo.projectakhir.movie.app.core.data.login;
+package sem2.pbo.projectakhir.movie.app.core.data.user;
 
 import sem2.pbo.projectakhir.movie.app.util.TypeOfUser;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class UserDB implements IUserDB {
     private List<UserEntity> userCollection = new ArrayList<>();

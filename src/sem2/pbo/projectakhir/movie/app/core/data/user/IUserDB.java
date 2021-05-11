@@ -1,4 +1,4 @@
-package sem2.pbo.projectakhir.movie.app.core.data.login;
+package sem2.pbo.projectakhir.movie.app.core.data.user;
 
 public interface IUserDB {
     UserEntity getAllUsers(String email, String password);

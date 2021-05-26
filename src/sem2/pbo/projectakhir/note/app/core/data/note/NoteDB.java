@@ -69,4 +69,8 @@ public class NoteDB implements NoteDao{
         }
         return isExist;
     }
+
+    public List<NoteEntity> getNotes() {
+        return notes;
+    }
 }

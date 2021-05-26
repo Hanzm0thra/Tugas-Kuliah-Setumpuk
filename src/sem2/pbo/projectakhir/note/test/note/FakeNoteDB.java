@@ -3,6 +3,7 @@ package sem2.pbo.projectakhir.note.test.note;
 import sem2.pbo.projectakhir.note.app.core.data.note.NoteDB;
 import sem2.pbo.projectakhir.note.app.core.data.note.NoteEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FakeNoteDB extends NoteDB {
@@ -30,5 +31,10 @@ public class FakeNoteDB extends NoteDB {
     @Override
     public boolean isIdExist(Integer id, String author) {
         return super.isIdExist(id, author);
+    }
+
+    @Override
+    public List<NoteEntity> getNotes() {
+        return super.getNotes();
     }
 }

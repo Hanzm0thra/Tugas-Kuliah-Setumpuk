@@ -99,12 +99,12 @@ public class AdjMatrix {
 
     public static void main(String[] args) {
         AdjMatrix theGraph = new AdjMatrix();
-        theGraph.addVertex('0');//0
-        theGraph.addVertex('1');//1
-        theGraph.addVertex('2');//2
-        theGraph.addVertex('3');//3
-        theGraph.addVertex('4');//4
-        theGraph.addVertex('5');//5
+        theGraph.addVertex('0');
+        theGraph.addVertex('1');
+        theGraph.addVertex('2');
+        theGraph.addVertex('3');
+        theGraph.addVertex('4');
+        theGraph.addVertex('5');
         theGraph.addEdge(0, 1,1);
         theGraph.addEdge(0, 2,1);
         theGraph.addEdge(2, 3,1);

@@ -31,7 +31,6 @@ class HashMapCustom<K, V> {
         table = new Entry[capacity];
     }
 
-
     public void put(K newKey, V data){
         if(newKey == null)
             return;    //does not allow to store null.
@@ -69,7 +68,6 @@ class HashMapCustom<K, V> {
         }
     }
 
-
     public V get(K key) {
         int hash = hash(key);
         //returns null if key is not found.
@@ -85,7 +83,6 @@ class HashMapCustom<K, V> {
     }
 
     public boolean remove(K deleteKey) {
-
         int hash = hash(deleteKey);
 
         if (table[hash] != null) {
@@ -107,12 +104,9 @@ class HashMapCustom<K, V> {
             }
         }
         return false;
-
     }
 
-
     public void display() {
-
         for (int i = 0; i < capacity; i++) {
             if (table[i] != null) {
                 Entry<K, V> entry = table[i];
@@ -122,7 +116,6 @@ class HashMapCustom<K, V> {
                 }
             }
         }
-
     }
 
     /**
@@ -138,6 +131,8 @@ class HashMapCustom<K, V> {
      3. ketika key bukan keduanya:
         ketika key bukan berupa String maupun Number maka akan memiliki fungsi -> key.hashCode() + Math.log(capacity)
         yang dikonversi menjadi integer
+
+     semua hasil dimasukkan ke dalam variabel hashVal dan direturn kan sebagai -> hashVal modulo capacity
      **/
     public int hash(K key) {
         int hashVal = 0;

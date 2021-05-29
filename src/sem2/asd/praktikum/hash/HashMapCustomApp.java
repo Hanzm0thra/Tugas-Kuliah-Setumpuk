@@ -1,6 +1,9 @@
 package sem2.asd.praktikum.hash;
 
 /**
+ Nama: Kylix Eza Saputra
+ NIM: 205150201111038
+
  Perbedaan:
  * capacity
  * hash function

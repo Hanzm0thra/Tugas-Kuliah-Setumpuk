@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="com.aventrix.jnanoid:jnanoid:2.0.0" type="repository">
+    <properties maven-id="com.aventrix.jnanoid:jnanoid:2.0.0" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/aventrix/jnanoid/jnanoid/2.0.0/jnanoid-2.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

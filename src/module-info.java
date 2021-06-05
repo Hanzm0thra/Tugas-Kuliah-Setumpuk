@@ -5,8 +5,11 @@ module JavaFX.Projects {
     requires javafx.swt;
     requires javafx.swing;
     requires javafx.base;
+    requires junit;
+    requires org.junit.jupiter.api;
 
     opens sample;
     opens praktikumpbo10;
     opens praktikumpbo10.ui;
+    opens projectakhir.note.app.ui;
 }

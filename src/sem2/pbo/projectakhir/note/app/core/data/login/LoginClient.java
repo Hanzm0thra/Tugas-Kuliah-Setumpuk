@@ -6,4 +6,6 @@ public interface LoginClient {
     boolean isEmailAlreadyExist(String email);
     boolean isNameAlreadyExist(String password);
     void register(String email, String password, String name);
+    String getName(String name);
+    String getEmail(String email);
 }

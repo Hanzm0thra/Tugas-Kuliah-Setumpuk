@@ -2,11 +2,11 @@ package sem2.pbo.projectakhir.noteX.app.core.data.note;
 
 public class NoteBuilder extends NoteDB {
 
-    private static NoteBuilder INSTANCE;
+    private static NoteDB INSTANCE;
 
-    public static NoteBuilder getInstance() {
+    public static NoteDB getInstance() {
         if (INSTANCE == null)
-            INSTANCE = new NoteBuilder();
+            INSTANCE = new NoteDB().noteBuild();
         return INSTANCE;
     }
 

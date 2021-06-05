@@ -1,14 +1,22 @@
-package sem2.pbo.projectakhir.note.test.note;
+package sem2.pbo.projectakhir.note.test;
 
+import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 import sem2.pbo.projectakhir.note.app.core.data.note.NoteDB;
 import sem2.pbo.projectakhir.note.app.core.data.note.NoteEntity;
-import sem2.pbo.projectakhir.note.test.di.FakeInjection;
 
+@RunWith(JUnit4.class)
 public class TestNoteDB {
 
-    NoteDB testNoteDB = FakeInjection.provideFakeNoteDB;
+    private NoteDB testNoteDB;
+
+    @Before
+    public void setup() {
+        testNoteDB = new NoteDB();
+    }
 
     private void insertNote() {
         testNoteDB.getNotes().clear();

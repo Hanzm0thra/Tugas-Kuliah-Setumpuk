@@ -5,7 +5,7 @@ public class LoginBuilder extends LoginDB {
 
     public static LoginDB getInstance() {
         if (INSTANCE == null)
-            INSTANCE = new LoginBuilder().build();
+            INSTANCE = new LoginBuilder().loginBuild();
         return INSTANCE;
     }
 

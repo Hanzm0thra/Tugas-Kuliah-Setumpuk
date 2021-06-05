@@ -13,7 +13,6 @@ public class App {
     public static void main(String[] args) {
 
         System.out.println("\t\t\t\tWelcome To Note App\t\t\t\t\t\n");
-
         Login account = loginView.login();
         String author = account.name();
 

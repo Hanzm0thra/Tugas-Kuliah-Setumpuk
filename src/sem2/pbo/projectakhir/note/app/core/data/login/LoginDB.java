@@ -1,5 +1,10 @@
 package sem2.pbo.projectakhir.note.app.core.data.login;
 
+import dagger.Module;
+import dagger.hilt.InstallIn;
+import dagger.hilt.components.SingletonComponent;
+
+import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +12,11 @@ public class LoginDB implements LoginClient{
 
     private List<LoginResponse> loginCollection = new ArrayList<>();
 
-    private List<LoginResponse> listAllUsers() {
+    public LoginDB() {
+        addListOfUser();
+    }
+
+    public void addListOfUser() {
         loginCollection.add(
                 new LoginResponse(
                         "akunbaru@gmail.com",
@@ -39,15 +48,13 @@ public class LoginDB implements LoginClient{
                         "user test"
                 )
         );
-
-        return loginCollection;
     }
 
     @Override
     public LoginResponse getAccount(String email, String password) {
         LoginResponse result = new LoginResponse(null, null, null);
 
-        for (LoginResponse loginResponse : listAllUsers()) {
+        for (LoginResponse loginResponse : loginCollection) {
             if (loginResponse.email().equals(email) && loginResponse.password().equals(password)) {
                 result = new LoginResponse(
                         loginResponse.email(),
@@ -62,13 +69,13 @@ public class LoginDB implements LoginClient{
 
     @Override
     public boolean isEmailAlreadyExist(String email) {
-        return listAllUsers()
+        return loginCollection
                 .stream().anyMatch(loginResponse -> loginResponse.email().equals(email));
     }
 
     @Override
     public boolean isNameAlreadyExist(String name) {
-        return listAllUsers()
+        return loginCollection
                 .stream().anyMatch(loginResponse -> loginResponse.name().equals(name));
     }
 
@@ -84,7 +91,21 @@ public class LoginDB implements LoginClient{
             );
     }
 
-    public List<LoginResponse> getLoginCollection() {
-        return loginCollection;
+    @Override
+    public String getName(String name) {
+        for (LoginResponse obj: loginCollection) {
+            if (obj.name().equals(name))
+                return name;
+        }
+        return null;
+    }
+
+    @Override
+    public String getEmail(String email) {
+        for (LoginResponse obj: loginCollection) {
+            if (obj.email().equals(email))
+                return email;
+        }
+        return null;
     }
 }

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="com.google.dagger:hilt-core:2.36" type="repository">
+    <properties maven-id="com.google.dagger:hilt-core:2.36" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/hilt-core-2.36.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/dagger-2.36.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jsr305-3.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.inject-1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

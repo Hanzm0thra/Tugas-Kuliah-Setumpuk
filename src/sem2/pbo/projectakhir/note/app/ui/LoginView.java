@@ -21,7 +21,6 @@ public class LoginView {
         System.out.println("................ Login Section .................");
 
         do {
-
             System.out.println("\n1. Login");
             System.out.println("2. Register");
             System.out.print("Masukkan pilihan: ");
@@ -41,14 +40,17 @@ public class LoginView {
                         isFinished = true;
                     }
                 }
+
                 case 2 -> {
                     System.out.print("Isikan nama pengguna: ");
                     String name = scanner.nextLine().trim();
+
                     if (noteRepository.isNameAlreadyExist(name)) {
                         System.out.println("Register gagal karena nama pengguna sudah digunakan");
                         isFinished = false;
                         break;
                     }
+
                     System.out.print("Isikan email: ");
                     String email = scanner.nextLine().trim();
                     if (noteRepository.isEmailAlreadyExist(email)) {
@@ -58,12 +60,22 @@ public class LoginView {
                     }
 
                     System.out.print("Isikan password: ");
-                    String password = scanner.nextLine().trim();
-                    noteRepository.register(email, password, name);
+                    String unverifiedPassword = scanner.nextLine().trim();
+
+                    System.out.print("Masukkan ulang password: ");
+                    String _password = scanner.nextLine().trim();
+
+                    if (unverifiedPassword.equals(_password)) {
+                        String password = _password;
+                        noteRepository.register(email, password, name);
+                    } else {
+                        System.out.println("Password yang anda masukkan tidak sama");
+                        isFinished = false;
+                    }
                 }
                 default -> System.out.println("Input Tidak Valid");
             }
-        }while (!isFinished);
+        } while (!isFinished);
 
         System.out.println("................................................");
         return account;

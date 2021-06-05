@@ -1,7 +1,6 @@
 package sem2.pbo.projectakhir.noteX.app.core.data.login;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,6 +25,8 @@ public class LoginDB implements LoginClient {
             }
         }
 
+        System.out.println(result);
+
         return result;
     }
 
@@ -45,25 +46,31 @@ public class LoginDB implements LoginClient {
     public void register(String email, String password, String name) {
         if (!isEmailAlreadyExist(email) && !isNameAlreadyExist(name)) {
             File loginFile = new File("D:\\Materi Kuliah\\Sem 2\\PBO\\Project Akhir\\Login Account.txt");
+
             try {
                 FileWriter writer = new FileWriter(loginFile);
-                String data = email + "-" + password + "-" + name;
-                writer.write(data + "\n");
+                loginList.add(new LoginResponse(
+                        email,
+                        password,
+                        name
+                ));
+                if (loginList.size() == 0) {
+                    String data = email + "-" + password + "-" + name + "\n";
+                    writer.write(data);
+                } else {
+                    for (LoginResponse obj: loginList) {
+                        String data = obj.email() + "-" + obj.password() + "-" + obj.name() + "\n";
+                        writer.write(data);
+                    }
+                }
                 writer.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-            loginList.add(
-                    new LoginResponse(
-                            email,
-                            password,
-                            name
-                    )
-            );
     }
 
-    public LoginDB build() {
+    public LoginDB loginBuild() {
         try {
             File loginFile = new File("D:\\Materi Kuliah\\Sem 2\\PBO\\Project Akhir\\Login Account.txt");
             if (!loginFile.exists())
@@ -71,16 +78,17 @@ public class LoginDB implements LoginClient {
 
             Scanner read = new Scanner(loginFile);
             while (read.hasNextLine())
-                fileBreakdown(read.nextLine());
+                loginFileBreakdown(read.nextLine());
 
             read.close();
+            System.out.println(loginList);
         } catch (IOException e) {
             e.printStackTrace();
         }
         return new LoginDB();
     }
 
-    private void fileBreakdown(String data) {
+    private void loginFileBreakdown(String data) {
         String[] arr = data.split("[-\n]");
         loginList.add(new LoginResponse(
                 arr[0],

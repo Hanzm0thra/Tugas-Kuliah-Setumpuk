@@ -1,11 +1,11 @@
 package sem2.pbo.projectakhir.note.app.core.data.login;
 
-public class LoginBuilder extends LoginDB{
-    private static LoginBuilder INSTANCE;
+public class LoginBuilder extends LoginDB {
+    private static LoginDB INSTANCE;
 
-    public static LoginBuilder getInstance() {
+    public static LoginDB getInstance() {
         if (INSTANCE == null)
-            INSTANCE = new LoginBuilder();
+            INSTANCE = new LoginDB();
         return INSTANCE;
     }
 }

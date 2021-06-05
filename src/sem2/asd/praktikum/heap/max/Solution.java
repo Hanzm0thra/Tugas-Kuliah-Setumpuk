@@ -1,6 +1,5 @@
-package sem2.asd.praktikum.maxheap;
+package sem2.asd.praktikum.heap.max;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Solution {

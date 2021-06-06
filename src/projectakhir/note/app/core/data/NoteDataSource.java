@@ -29,6 +29,10 @@ public class NoteDataSource {
         return noteDao.getAllNotes(author);
     }
 
+    public NoteEntity getSelectedNote(Integer id) {
+        return noteDao.getSelectedNote(id);
+    }
+
     public boolean isIdExist(Integer id, String author) {
         return noteDao.isIdExist(id, author);
     }

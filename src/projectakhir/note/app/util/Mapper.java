@@ -30,4 +30,14 @@ public class Mapper {
                 )
         ).collect(Collectors.toList());
     }
+
+    public static Note mappingNote(NoteEntity noteEntity) {
+        return new Note(
+                noteEntity.id(),
+                noteEntity.title(),
+                noteEntity.content(),
+                noteEntity.date(),
+                noteEntity.author()
+        );
+    }
 }

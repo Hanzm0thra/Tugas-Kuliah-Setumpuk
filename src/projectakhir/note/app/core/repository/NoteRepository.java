@@ -12,7 +12,7 @@ import projectakhir.note.app.util.Mapper;
 
 import java.util.List;
 
-public class NoteRepository implements INoteRepository{
+public class NoteRepository implements INoteRepository {
 
     private LoginDataSource loginDataSource;
     private NoteDataSource noteDataSource;
@@ -81,6 +81,21 @@ public class NoteRepository implements INoteRepository{
             @Override
             public List<NoteEntity> call() {
                 return noteDataSource.getAllNotes(author);
+            }
+        }.asResult();
+    }
+
+    @Override
+    public Note getSelectedNote(Integer id) {
+        return new Resource<NoteEntity, Note>() {
+            @Override
+            public Note loadData(NoteEntity data) {
+                return Mapper.mappingNote(data);
+            }
+
+            @Override
+            public NoteEntity call() {
+                return noteDataSource.getSelectedNote(id);
             }
         }.asResult();
     }

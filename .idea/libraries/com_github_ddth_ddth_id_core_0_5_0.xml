@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="com.github.ddth:ddth-id-core:0.5.0" type="repository">
+    <properties maven-id="com.github.ddth:ddth-id-core:0.5.0" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/ddth-id-core-0.5.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-lang3-3.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/guava-16.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

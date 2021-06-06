@@ -9,7 +9,6 @@ import projectakhir.note.app.core.data.note.NoteBuilder;
 import projectakhir.note.app.core.data.note.NoteDao;
 import projectakhir.note.app.core.repository.INoteRepository;
 import projectakhir.note.app.core.repository.NoteRepository;
-import projectakhir.note.app.model.Login;
 import projectakhir.note.app.ui.*;
 
 public class Injection {

@@ -61,8 +61,8 @@ public class HomeForm extends Application {
         btnNewNote.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                NewNoteForm newNoteForm = new NewNoteForm();
-                newNoteForm.start(stage);
+                InsertNoteForm insertNoteForm = new InsertNoteForm();
+                insertNoteForm.start(stage);
             }
         });
     }

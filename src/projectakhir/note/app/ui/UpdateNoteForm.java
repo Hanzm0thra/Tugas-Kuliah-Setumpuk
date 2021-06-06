@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import projectakhir.note.app.core.repository.INoteRepository;
 import projectakhir.note.app.di.Injection;
 
-public class NewNoteForm extends Application {
+public class UpdateNoteForm extends Application {
 
     private Text textTitle;
     private Text textContent;
@@ -34,6 +34,16 @@ public class NewNoteForm extends Application {
 
     private Button btnAddNote;
     private Button btnBack;
+
+    private Integer tempId;
+    private String tempTitle;
+    private String tempContent;
+    private String tempDeadline;
+    private String tempAuthor;
+
+    private String tempDate;
+    private String tempMonth;
+    private String tempYear;
 
     private final INoteRepository noteRepository = Injection.provideNoteRepository;
 
@@ -145,7 +155,7 @@ public class NewNoteForm extends Application {
 
     private void initButtonAddNote() {
         btnAddNote = new Button();
-        btnAddNote.setText("Confirm");
+        btnAddNote.setText("update");
         btnAddNote.setPrefSize(250, 50);
         btnAddNote.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -160,16 +170,14 @@ public class NewNoteForm extends Application {
                 String month = tfMonth.getText();
                 String year = tfYear.getText();
                 String deadline = String.format("%s-%s-%s", date, month, year);
-                String author = HomeForm.argAccountName;
 
                 if (title.isEmpty() || content.isEmpty() || date.isEmpty() || month.isEmpty() || year.isEmpty()) {
                     dialog.setContentText("Data belum lengkap, silahkan dilengkapi");
                     dialog.showAndWait();
                 } else {
-                    noteRepository.insert(title, content, deadline, author);
-                    dialog.setContentText("Note telah ditambahkan");
+                    noteRepository.update(tempId, title, content, deadline, tempAuthor);
+                    dialog.setContentText("Note telah diperbaharui");
                     dialog.showAndWait();
-                    clear();
                 }
             }
         });
@@ -189,11 +197,26 @@ public class NewNoteForm extends Application {
         });
     }
 
-    private void clear() {
-        tfTitle.clear();
-        taContent.clear();
-        tfDate.clear();
-        tfMonth.clear();
-        tfYear.clear();
+    public void setAllProp(Integer noteId, String noteTitle, String noteContent, String noteDeadline, String noteAuthor) {
+        tempId = noteId;
+        tempTitle = noteTitle;
+        tempContent = noteContent;
+        tempDeadline = noteDeadline;
+        tempAuthor = noteAuthor;
+        deadlineBreakDown();
+
+        tfTitle.setText(tempTitle);
+        taContent.setText(tempContent);
+        tfDate.setText(tempDate);
+        tfMonth.setText(tempMonth);
+        tfYear.setText(tempYear);
+    }
+
+    private void deadlineBreakDown() {
+        String[] deadline = tempDeadline.split("-", -1);
+
+        tempDate = deadline[0];
+        tempMonth = deadline[1];
+        tempYear = deadline[2];
     }
 }

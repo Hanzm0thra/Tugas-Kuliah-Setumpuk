@@ -3,7 +3,7 @@ package projectakhir.note.app.core.data.note;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NoteDB implements NoteDao{
+public class NoteDB implements NoteDao {
 
     private List<NoteEntity> notes = new ArrayList<>();
 
@@ -55,6 +55,24 @@ public class NoteDB implements NoteDao{
         }
 
         return selectedNote;
+    }
+
+    @Override
+    public NoteEntity getSelectedNote(Integer id) {
+        NoteEntity noteEntity = new NoteEntity(-1, null, null, null, null);
+
+        for (NoteEntity obj: notes) {
+            if (obj.id().equals(id))
+                noteEntity = new NoteEntity(
+                        obj.id(),
+                        obj.title(),
+                        obj.content(),
+                        obj.date(),
+                        obj.author()
+                );
+        }
+
+        return noteEntity;
     }
 
     @Override

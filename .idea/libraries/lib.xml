@@ -2,6 +2,7 @@
   <library name="lib">
     <CLASSES>
       <root url="file://$PROJECT_DIR$/../../../../Java/javafx-sdk-16/lib" />
+      <root url="jar://$PROJECT_DIR$/lib/jnanoid-2.0.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

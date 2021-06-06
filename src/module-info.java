@@ -7,9 +7,11 @@ module JavaFX.Projects {
     requires javafx.base;
     requires junit;
     requires org.junit.jupiter.api;
+    requires jnanoid;
 
     opens sample;
     opens praktikumpbo10;
     opens praktikumpbo10.ui;
+    opens projectakhir.note.app;
     opens projectakhir.note.app.ui;
 }

@@ -7,10 +7,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.MapValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import projectakhir.note.app.core.repository.INoteRepository;
 import projectakhir.note.app.di.Injection;
@@ -21,16 +21,24 @@ import java.util.Map;
 
 public class AllNotesForm extends Application {
 
-    TableView<Map> noteTable;
-    TableColumn<Map, Integer> columnId;
-    TableColumn<Map, String> columnTitle;
-    TableColumn<Map, String> columnContent;
-    TableColumn<Map, String> columnDate;
-    TableColumn<Map, String> columnAuthor;
+    private TableView<Map> noteTable;
+    private TableColumn<Map, Integer> columnId;
+    private TableColumn<Map, String> columnTitle;
+    private TableColumn<Map, String> columnDate;
 
-    Button btnBack;
+    private Button btnBack;
+    private Button btnEdit;
+    private Button btnDelete;
+    private Button btnDetail;
+
+    private Integer noteId;
+    private String noteTitle;
+    private String noteContent;
+    private String noteDeadline;
+    private String noteAuthor;
 
     private final INoteRepository noteRepository = Injection.provideNoteRepository;
+    ObservableList<Map<String, Object>> items = FXCollections.<Map<String, Object>>observableArrayList();
 
     public static void main(String[] args) {
         launch(args);
@@ -40,9 +48,17 @@ public class AllNotesForm extends Application {
     public void start(Stage primaryStage) {
         initTableView();
         initButtonBack(primaryStage);
+        initButtonEdit(primaryStage);
+        initButtonDelete();
+        initButtonDetail();
 
-        Group root = new Group(noteTable, btnBack);
-        Scene scene = new Scene(root, 500, 500);
+        VBox vBoxButtons = new VBox(25, btnEdit, btnDelete, btnDetail);
+        HBox hBoxComp = new HBox(50, noteTable, vBoxButtons);
+        hBoxComp.setLayoutX(50);
+        hBoxComp.setLayoutY(50);
+
+        Group root = new Group(btnBack, hBoxComp);
+        Scene scene = new Scene(root, 700, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -52,25 +68,31 @@ public class AllNotesForm extends Application {
         noteTable.setLayoutX(50);
         noteTable.setPrefSize(400, 400);
 
-        columnId = new TableColumn<>();
-        columnId.setCellValueFactory(new MapValueFactory<>("id"));
+        noteTable.setRowFactory(table -> {
+            TableRow<Map> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (!row.isEmpty()) {
+                    Map rowData = row.getItem();
+                    selectedRow(rowData);
+                }
+            });
+            return row;
+        });
+
+        columnId = new TableColumn<Map, Integer>();
+        columnId.setCellValueFactory(new MapValueFactory<Integer>("id"));
         columnId.setText("Id");
+        columnId.setPrefWidth(50);
 
         columnTitle = new TableColumn<>();
         columnTitle.setCellValueFactory(new MapValueFactory<>("title"));
         columnTitle.setText("Title");
-
-        columnContent = new TableColumn<>();
-        columnContent.setCellValueFactory(new MapValueFactory<>("content"));
-        columnContent.setText("Content");
+        columnTitle.setPrefWidth(220);
 
         columnDate = new TableColumn<>();
         columnDate.setCellValueFactory(new MapValueFactory<>("date"));
         columnDate.setText("Deadline");
-
-        columnAuthor = new TableColumn<>();
-        columnAuthor.setCellValueFactory(new MapValueFactory<>("author"));
-        columnAuthor.setText("Author");
+        columnDate.setPrefWidth(130);
 
         noteTable.getColumns().add(columnId);
         noteTable.getColumns().add(columnTitle);
@@ -80,7 +102,6 @@ public class AllNotesForm extends Application {
     }
 
     private void showAllNotes() {
-        ObservableList<Map<String, Object>> items = FXCollections.<Map<String, Object>>observableArrayList();
 
         for (Note note: noteRepository.getAllNotes(HomeForm.argAccountName)) {
             Map<String, Object> item = new HashMap<>();
@@ -96,7 +117,7 @@ public class AllNotesForm extends Application {
         btnBack = new Button();
         btnBack.setText("Back");
         btnBack.setLayoutX(25);
-        btnBack.setLayoutY(450);
+        btnBack.setLayoutY(550);
         btnBack.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -104,5 +125,65 @@ public class AllNotesForm extends Application {
                 homeForm.start(stage);
             }
         });
+    }
+
+    private void initButtonEdit(Stage stage) {
+        btnEdit = new Button();
+        btnEdit.setText("Edit");
+        btnEdit.setPrefSize(100, 50);
+        btnEdit.setDisable(true);
+        btnEdit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                UpdateNoteForm updateNoteForm = new UpdateNoteForm();
+                updateNoteForm.start(stage);
+                updateNoteForm.setAllProp(noteId, noteTitle, noteContent, noteDeadline, noteAuthor);
+            }
+        });
+    }
+
+    private void initButtonDelete() {
+        btnDelete = new Button();
+        btnDelete.setText("Delete");
+        btnDelete.setPrefSize(100, 50);
+        btnDelete.setDisable(true);
+        btnDelete.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                noteRepository.delete(noteId);
+                Map<String, Object> item = new HashMap<>();
+                item.put("id", noteId);
+                item.put("title", noteTitle);
+                item.put("date", noteDeadline);
+                noteTable.getItems().remove(item);
+            }
+        });
+    }
+
+    private void initButtonDetail() {
+        btnDetail = new Button();
+        btnDetail.setText("Detail");
+        btnDetail.setPrefSize(100, 50);
+        btnDetail.setDisable(true);
+        btnDetail.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+            }
+        });
+    }
+
+    private void selectedRow(Map note) {
+        Integer id = (Integer) note.get("id");
+        Note selectedNote = noteRepository.getSelectedNote(id);
+        noteId = selectedNote.id();
+        noteTitle = selectedNote.title();
+        noteContent = selectedNote.content();
+        noteDeadline = selectedNote.date();
+        noteAuthor = selectedNote.author();
+
+        btnEdit.setDisable(false);
+        btnDelete.setDisable(false);
+        btnDetail.setDisable(false);
     }
 }

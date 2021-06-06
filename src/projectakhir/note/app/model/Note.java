@@ -6,5 +6,4 @@ public record Note(
         String content,
         String date,
         String author
-) {
-}
+) { }

@@ -17,5 +17,6 @@ public interface INoteRepository {
     void delete(Integer id);
     void update(Integer id, String title, String content, String date, String author);
     List<Note> getAllNotes(String author);
+    Note getSelectedNote(Integer id);
     boolean isIdExist(Integer id, String author);
 }

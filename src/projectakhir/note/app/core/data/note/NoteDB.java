@@ -1,5 +1,7 @@
 package projectakhir.note.app.core.data.note;
 
+import com.aventrix.jnanoid.jnanoid.NanoIdUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,13 +11,7 @@ public class NoteDB implements NoteDao {
 
     @Override
     public void insert(String title, String content, String date, String author) {
-        int id;
-        if (notes.size() == 0)
-            id = 1;
-        else {
-            int size = notes.size() - 1;
-            id = notes.get(size).id() + 1;
-        }
+        String id = NanoIdUtils.randomNanoId();
         notes.add(new NoteEntity(
                 id,
                 title,
@@ -26,12 +22,12 @@ public class NoteDB implements NoteDao {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(String id) {
         notes.removeIf(obj -> obj.id().equals(id));
     }
 
     @Override
-    public void update(Integer id, String title, String content, String date, String author) {
+    public void update(String id, String title, String content, String date, String author) {
         for (int index = 0; index < notes.size(); index++) {
             if (notes.get(index).id().equals(id)) {
                 notes.set(index, new NoteEntity(
@@ -58,8 +54,8 @@ public class NoteDB implements NoteDao {
     }
 
     @Override
-    public NoteEntity getSelectedNote(Integer id) {
-        NoteEntity noteEntity = new NoteEntity(-1, null, null, null, null);
+    public NoteEntity getSelectedNote(String id) {
+        NoteEntity noteEntity = new NoteEntity(null, null, null, null, null);
 
         for (NoteEntity obj: notes) {
             if (obj.id().equals(id))
@@ -76,7 +72,7 @@ public class NoteDB implements NoteDao {
     }
 
     @Override
-    public boolean isIdExist(Integer id, String author) {
+    public boolean isIdExist(String id, String author) {
         boolean isExist = false;
 
         for (NoteEntity obj: notes) {

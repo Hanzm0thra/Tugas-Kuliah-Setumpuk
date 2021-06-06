@@ -22,7 +22,7 @@ import java.util.Map;
 public class AllNotesForm extends Application {
 
     private TableView<Map> noteTable;
-    private TableColumn<Map, Integer> columnId;
+    private TableColumn<Map, String> columnId;
     private TableColumn<Map, String> columnTitle;
     private TableColumn<Map, String> columnDate;
 
@@ -31,7 +31,7 @@ public class AllNotesForm extends Application {
     private Button btnDelete;
     private Button btnDetail;
 
-    private Integer noteId;
+    private String noteId;
     private String noteTitle;
     private String noteContent;
     private String noteDeadline;
@@ -50,7 +50,7 @@ public class AllNotesForm extends Application {
         initButtonBack(primaryStage);
         initButtonEdit(primaryStage);
         initButtonDelete();
-        initButtonDetail();
+        initButtonDetail(primaryStage);
 
         VBox vBoxButtons = new VBox(25, btnEdit, btnDelete, btnDetail);
         HBox hBoxComp = new HBox(50, noteTable, vBoxButtons);
@@ -79,20 +79,20 @@ public class AllNotesForm extends Application {
             return row;
         });
 
-        columnId = new TableColumn<Map, Integer>();
-        columnId.setCellValueFactory(new MapValueFactory<Integer>("id"));
+        columnId = new TableColumn<>();
+        columnId.setCellValueFactory(new MapValueFactory<>("id"));
         columnId.setText("Id");
-        columnId.setPrefWidth(50);
+        columnId.setPrefWidth(100);
 
         columnTitle = new TableColumn<>();
         columnTitle.setCellValueFactory(new MapValueFactory<>("title"));
         columnTitle.setText("Title");
-        columnTitle.setPrefWidth(220);
+        columnTitle.setPrefWidth(200);
 
         columnDate = new TableColumn<>();
         columnDate.setCellValueFactory(new MapValueFactory<>("date"));
         columnDate.setText("Deadline");
-        columnDate.setPrefWidth(130);
+        columnDate.setPrefWidth(100);
 
         noteTable.getColumns().add(columnId);
         noteTable.getColumns().add(columnTitle);
@@ -160,7 +160,7 @@ public class AllNotesForm extends Application {
         });
     }
 
-    private void initButtonDetail() {
+    private void initButtonDetail(Stage stage) {
         btnDetail = new Button();
         btnDetail.setText("Detail");
         btnDetail.setPrefSize(100, 50);
@@ -168,13 +168,15 @@ public class AllNotesForm extends Application {
         btnDetail.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                DetailNote detailNote = new DetailNote();
+                detailNote.setAllProp(noteId, noteTitle, noteContent, noteDeadline, noteAuthor);
+                detailNote.start(stage);
             }
         });
     }
 
     private void selectedRow(Map note) {
-        Integer id = (Integer) note.get("id");
+        String id = (String) note.get("id");
         Note selectedNote = noteRepository.getSelectedNote(id);
         noteId = selectedNote.id();
         noteTitle = selectedNote.title();

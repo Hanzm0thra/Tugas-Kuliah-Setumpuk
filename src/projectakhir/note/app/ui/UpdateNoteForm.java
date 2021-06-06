@@ -35,7 +35,7 @@ public class UpdateNoteForm extends Application {
     private Button btnAddNote;
     private Button btnBack;
 
-    private Integer tempId;
+    private String tempId;
     private String tempTitle;
     private String tempContent;
     private String tempDeadline;
@@ -155,7 +155,7 @@ public class UpdateNoteForm extends Application {
 
     private void initButtonAddNote() {
         btnAddNote = new Button();
-        btnAddNote.setText("update");
+        btnAddNote.setText("Update");
         btnAddNote.setPrefSize(250, 50);
         btnAddNote.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -191,13 +191,13 @@ public class UpdateNoteForm extends Application {
         btnBack.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                HomeForm homeForm = new HomeForm();
-                homeForm.start(stage);
+                AllNotesForm allNotesForm = new AllNotesForm();
+                allNotesForm.start(stage);
             }
         });
     }
 
-    public void setAllProp(Integer noteId, String noteTitle, String noteContent, String noteDeadline, String noteAuthor) {
+    public void setAllProp(String noteId, String noteTitle, String noteContent, String noteDeadline, String noteAuthor) {
         tempId = noteId;
         tempTitle = noteTitle;
         tempContent = noteContent;

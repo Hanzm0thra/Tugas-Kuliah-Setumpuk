@@ -86,7 +86,7 @@ public class RegisterForm extends Application {
 
         Group root = new Group(txtRegister, vBoxLoginComp, btnBack);
 
-        Scene scene = new Scene(root, 700, 500);
+        Scene scene = new Scene(root, 500, 500);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

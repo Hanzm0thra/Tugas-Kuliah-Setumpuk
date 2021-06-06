@@ -9,7 +9,6 @@ import projectakhir.note.app.core.data.note.NoteBuilder;
 import projectakhir.note.app.core.data.note.NoteDao;
 import projectakhir.note.app.core.repository.INoteRepository;
 import projectakhir.note.app.core.repository.NoteRepository;
-import projectakhir.note.app.ui.*;
 
 public class Injection {
 
@@ -24,7 +23,4 @@ public class Injection {
     //Repository
     public static INoteRepository provideNoteRepository = new NoteRepository(provideLoginDataSource, provideNoteDataSource);
 
-    //View
-    public static LoginView provideLoginView = new LoginView(provideNoteRepository);
-    public static HomeView provideHomeView = new HomeView(provideNoteRepository, provideLoginView);
 }

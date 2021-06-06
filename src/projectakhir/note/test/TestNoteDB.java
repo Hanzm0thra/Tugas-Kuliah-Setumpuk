@@ -28,24 +28,24 @@ public class TestNoteDB {
     @Test
     public void insertScenarioTest() {
         insertNote();
-        Assertions.assertEquals(new NoteEntity(1,"test1", "ini content test1", "2-5-2021", "kylix"), testNoteDB.getAllNotes("kylix").get(0));
-        Assertions.assertEquals(new NoteEntity(2, "test2", "ini content test2", "30-4-2021", "kylix"), testNoteDB.getAllNotes("kylix").get(1));
-        Assertions.assertEquals(new NoteEntity(3, "test3", "ini content test3", "1-1-2020", "usertest3"), testNoteDB.getAllNotes("usertest3").get(0));
+        Assertions.assertEquals(new NoteEntity("1","test1", "ini content test1", "2-5-2021", "kylix"), testNoteDB.getAllNotes("kylix").get(0));
+        Assertions.assertEquals(new NoteEntity("2", "test2", "ini content test2", "30-4-2021", "kylix"), testNoteDB.getAllNotes("kylix").get(1));
+        Assertions.assertEquals(new NoteEntity("3", "test3", "ini content test3", "1-1-2020", "usertest3"), testNoteDB.getAllNotes("usertest3").get(0));
     }
 
     @Test
     public void updateScenarioTest() {
         insertNote();
-        testNoteDB.update(1, "test1", "menggantikan content test1", "22-5-2021", "kylix");
-        Assertions.assertEquals(new NoteEntity(1, "test1", "menggantikan content test1", "22-5-2021", "kylix"), testNoteDB.getAllNotes("kylix").get(0));
+        testNoteDB.update("1", "test1", "menggantikan content test1", "22-5-2021", "kylix");
+        Assertions.assertEquals(new NoteEntity("1", "test1", "menggantikan content test1", "22-5-2021", "kylix"), testNoteDB.getAllNotes("kylix").get(0));
 
     }
 
     @Test
     public void deleteScenarioTest() {
         insertNote();
-        testNoteDB.delete(1);
-        testNoteDB.delete(2);
+        testNoteDB.delete("1");
+        testNoteDB.delete("2");
         Assertions.assertEquals(0, testNoteDB.getAllNotes("kylix").size());
         Assertions.assertEquals(1, testNoteDB.getAllNotes("usertest3").size());
     }
@@ -53,9 +53,9 @@ public class TestNoteDB {
     @Test
     public void checkIdScenarioTest() {
         deleteScenarioTest();
-        Assertions.assertFalse(testNoteDB.isIdExist(1, "kylix"));
-        Assertions.assertFalse(testNoteDB.isIdExist(1, "usertest3"));
-        Assertions.assertTrue(testNoteDB.isIdExist(3, "usertest3"));
+        Assertions.assertFalse(testNoteDB.isIdExist("1", "kylix"));
+        Assertions.assertFalse(testNoteDB.isIdExist("1", "usertest3"));
+        Assertions.assertTrue(testNoteDB.isIdExist("3", "usertest3"));
     }
 
     @Test

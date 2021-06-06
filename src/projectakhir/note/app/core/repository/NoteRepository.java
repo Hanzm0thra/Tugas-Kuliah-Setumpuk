@@ -60,12 +60,12 @@ public class NoteRepository implements INoteRepository {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(String id) {
         noteDataSource.delete(id);
     }
 
     @Override
-    public void update(Integer id, String title, String content, String date, String author) {
+    public void update(String id, String title, String content, String date, String author) {
         noteDataSource.update(id, title, content, date, author);
     }
 
@@ -86,7 +86,7 @@ public class NoteRepository implements INoteRepository {
     }
 
     @Override
-    public Note getSelectedNote(Integer id) {
+    public Note getSelectedNote(String id) {
         return new Resource<NoteEntity, Note>() {
             @Override
             public Note loadData(NoteEntity data) {
@@ -101,7 +101,7 @@ public class NoteRepository implements INoteRepository {
     }
 
     @Override
-    public boolean isIdExist(Integer id, String author) {
+    public boolean isIdExist(String id, String author) {
         return noteDataSource.isIdExist(id, author);
     }
 }

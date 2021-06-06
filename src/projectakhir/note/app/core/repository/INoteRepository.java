@@ -14,9 +14,9 @@ public interface INoteRepository {
     void register(String email, String password, String name);
 
     void insert(String title, String content, String date, String author);
-    void delete(Integer id);
-    void update(Integer id, String title, String content, String date, String author);
+    void delete(String id);
+    void update(String id, String title, String content, String date, String author);
     List<Note> getAllNotes(String author);
-    Note getSelectedNote(Integer id);
-    boolean isIdExist(Integer id, String author);
+    Note getSelectedNote(String id);
+    boolean isIdExist(String id, String author);
 }

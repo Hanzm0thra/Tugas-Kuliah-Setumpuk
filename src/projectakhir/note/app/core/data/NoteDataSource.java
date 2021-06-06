@@ -17,11 +17,11 @@ public class NoteDataSource {
         noteDao.insert(title, content, date, author);
     }
 
-    public void delete(Integer id) {
+    public void delete(String id) {
         noteDao.delete(id);
     }
 
-    public void update(Integer id, String title, String content, String date, String author) {
+    public void update(String id, String title, String content, String date, String author) {
         noteDao.update(id, title, content, date, author);
     }
 
@@ -29,11 +29,11 @@ public class NoteDataSource {
         return noteDao.getAllNotes(author);
     }
 
-    public NoteEntity getSelectedNote(Integer id) {
+    public NoteEntity getSelectedNote(String id) {
         return noteDao.getSelectedNote(id);
     }
 
-    public boolean isIdExist(Integer id, String author) {
+    public boolean isIdExist(String id, String author) {
         return noteDao.isIdExist(id, author);
     }
 }

@@ -24,6 +24,7 @@ public class NewNoteForm extends Application {
     private Text textDate;
     private Text textMonth;
     private Text textYear;
+    private Text textAuthor;
 
     private TextField tfTitle;
     private TextArea taContent;
@@ -48,6 +49,7 @@ public class NewNoteForm extends Application {
         initTextDate();
         initTextMonth();
         initTextYear();
+        initTextAuthor();
 
         initTextFieldTitle();
         initTextAreaContent();
@@ -69,10 +71,10 @@ public class NewNoteForm extends Application {
 
         VBox vBoxAddNote = new VBox(25, hBoxTitleContent, vBoxDeadline, btnAddNote);
         vBoxAddNote.setLayoutX(50);
-        vBoxAddNote.setLayoutY(50);
+        vBoxAddNote.setLayoutY(100);
 
-        Group root = new Group(vBoxAddNote, btnBack);
-        Scene scene = new Scene(root, 750, 600);
+        Group root = new Group(textAuthor, vBoxAddNote, btnBack);
+        Scene scene = new Scene(root, 700, 700);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -111,6 +113,14 @@ public class NewNoteForm extends Application {
         textYear = new Text();
         textYear.setText("Year(YYYY)");
         textYear.setFont(Font.font("Calibri", FontPosture.REGULAR, 18));
+    }
+
+    public void initTextAuthor() {
+        textAuthor = new Text();
+        textAuthor.setText("Author: " + HomeForm.argAccountName);
+        textAuthor.setX(50);
+        textAuthor.setY(50);
+        textAuthor.setFont(Font.font("Calibri", FontWeight.BOLD, 14));
     }
 
     private void initTextFieldTitle() {
@@ -168,8 +178,8 @@ public class NewNoteForm extends Application {
     private void initButtonBack(Stage stage) {
         btnBack = new Button();
         btnBack.setText("Back");
-        btnBack.setLayoutX(50);
-        btnBack.setLayoutY(550);
+        btnBack.setLayoutX(25);
+        btnBack.setLayoutY(650);
         btnBack.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {

@@ -11,7 +11,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import projectakhir.note.app.di.Injection;
 
 public class HomeForm extends Application {
 
@@ -30,9 +29,9 @@ public class HomeForm extends Application {
     @Override
     public void start(Stage primaryStage) {
         initButtonNewNote(primaryStage);
-        initButtonAllNotes();
+        initButtonAllNotes(primaryStage);
         initButtonLogout(primaryStage);
-        initTextWelcome();
+        initTextAuthor();
 
         VBox vBoxAllButton = new VBox(25, btnNewNote, btnAllNotes, btnLogout);
         vBoxAllButton.setLayoutX(150);
@@ -47,7 +46,7 @@ public class HomeForm extends Application {
         primaryStage.show();
     }
 
-    public void initTextWelcome() {
+    public void initTextAuthor() {
         textAuthor = new Text();
         textAuthor.setText("Author: " + argAccountName);
         textAuthor.setX(50);
@@ -68,10 +67,17 @@ public class HomeForm extends Application {
         });
     }
 
-    private void initButtonAllNotes() {
+    private void initButtonAllNotes(Stage stage) {
         btnAllNotes = new Button();
         btnAllNotes.setText("All Notes");
         btnAllNotes.setPrefSize(200, 75);
+        btnAllNotes.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                AllNotesForm allNotesForm = new AllNotesForm();
+                allNotesForm.start(stage);
+            }
+        });
     }
 
     private void initButtonLogout(Stage stage) {

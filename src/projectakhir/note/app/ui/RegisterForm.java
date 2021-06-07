@@ -81,12 +81,12 @@ public class RegisterForm extends Application {
         HBox hBoxRegisterButton = new HBox(35, btnCheck, btnRegister, txtAccountAvailable);
 
         VBox vBoxLoginComp = new VBox(20, hBoxRegisterFill, hBoxRegisterButton);
-        vBoxLoginComp.setLayoutX(50);
+        vBoxLoginComp.setLayoutX(150);
         vBoxLoginComp.setLayoutY(200);
 
         Group root = new Group(txtRegister, vBoxLoginComp, btnBack);
 
-        Scene scene = new Scene(root, 500, 500);
+        Scene scene = new Scene(root, 700, 700);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -94,7 +94,7 @@ public class RegisterForm extends Application {
     private void initTextRegister() {
         txtRegister = new Text();
         txtRegister.setText("Register");
-        txtRegister.setLayoutX(150);
+        txtRegister.setLayoutX(250);
         txtRegister.setLayoutY(150);
         txtRegister.setFont(Font.font("Calibri", FontWeight.BOLD, 24));
     }
@@ -217,7 +217,7 @@ public class RegisterForm extends Application {
         btnBack = new Button();
         btnBack.setText("Back");
         btnBack.setLayoutX(25);
-        btnBack.setLayoutY(450);
+        btnBack.setLayoutY(650);
         btnBack.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -255,7 +255,6 @@ public class RegisterForm extends Application {
             isEmailFix = true;
             txtErrorEmail.setVisible(false);
         }
-
 
         if (!password.equals(rePassword)) {
             txtAccountAvailable.setVisible(false);

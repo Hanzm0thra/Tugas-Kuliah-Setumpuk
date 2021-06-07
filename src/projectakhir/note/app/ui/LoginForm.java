@@ -55,11 +55,11 @@ public class LoginForm extends Application {
         HBox loginRegister = new HBox(20, btnLogin, btnRegister, txtWarn);
 
         VBox login = new VBox(25,email, password, loginRegister);
-        login.setLayoutX(100);
-        login.setLayoutY(165);
+        login.setLayoutX(200);
+        login.setLayoutY(265);
 
         Group root = new Group(txtWelcome, login);
-        Scene scene = new Scene(root, 500, 500);
+        Scene scene = new Scene(root, 700, 700);
 
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -68,8 +68,8 @@ public class LoginForm extends Application {
     private void initTextWelcome() {
         txtWelcome = new Text();
         txtWelcome.setText("Welcome To Note");
-        txtWelcome.setX(175);
-        txtWelcome.setY(100);
+        txtWelcome.setX(275);
+        txtWelcome.setY(200);
         txtWelcome.setFont(Font.font("Calibri", FontWeight.BOLD, 24));
     }
 

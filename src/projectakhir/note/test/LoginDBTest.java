@@ -8,7 +8,7 @@ import org.junit.runners.JUnit4;
 import projectakhir.note.app.core.data.login.LoginDB;
 
 @RunWith(JUnit4.class)
-public class TestLoginDB {
+public class LoginDBTest {
 
     private LoginDB loginDB;
 

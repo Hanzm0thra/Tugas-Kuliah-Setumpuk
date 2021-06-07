@@ -34,15 +34,12 @@ public class HomeForm extends Application {
         initTextAuthor();
 
         VBox vBoxAllButton = new VBox(25, btnNewNote, btnAllNotes, btnLogout);
-        vBoxAllButton.setLayoutX(150);
+        vBoxAllButton.setLayoutX(250);
         vBoxAllButton.setLayoutY(135);
 
         Group root = new Group(textAuthor, vBoxAllButton);
-
-        Scene scene = new Scene(root, 500, 500);
-
+        Scene scene = new Scene(root, 700, 700);
         primaryStage.setScene(scene);
-
         primaryStage.show();
     }
 

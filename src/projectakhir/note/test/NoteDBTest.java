@@ -9,7 +9,7 @@ import projectakhir.note.app.core.data.note.NoteDB;
 import projectakhir.note.app.core.data.note.NoteEntity;
 
 @RunWith(JUnit4.class)
-public class TestNoteDB {
+public class NoteDBTest {
 
     private NoteDB testNoteDB;
 

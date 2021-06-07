@@ -26,6 +26,10 @@ public class AllNotesForm extends Application {
     private TableColumn<Map, String> columnTitle;
     private TableColumn<Map, String> columnDate;
 
+    private final String KEY_OF_COLUMN_ID = "id";
+    private final String KEY_OF_COLUMN_TITLE = "title";
+    private final String KEY_OF_COLUMN_DATE = "date";
+
     private Button btnBack;
     private Button btnEdit;
     private Button btnDelete;
@@ -58,7 +62,7 @@ public class AllNotesForm extends Application {
         hBoxComp.setLayoutY(50);
 
         Group root = new Group(btnBack, hBoxComp);
-        Scene scene = new Scene(root, 700, 600);
+        Scene scene = new Scene(root, 700, 700);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -66,7 +70,7 @@ public class AllNotesForm extends Application {
     private void initTableView() {
         noteTable = new TableView<>();
         noteTable.setLayoutX(50);
-        noteTable.setPrefSize(400, 400);
+        noteTable.setPrefSize(400, 550);
 
         noteTable.setRowFactory(table -> {
             TableRow<Map> row = new TableRow<>();
@@ -80,17 +84,17 @@ public class AllNotesForm extends Application {
         });
 
         columnId = new TableColumn<>();
-        columnId.setCellValueFactory(new MapValueFactory<>("id"));
+        columnId.setCellValueFactory(new MapValueFactory<>(KEY_OF_COLUMN_ID));
         columnId.setText("Id");
         columnId.setPrefWidth(100);
 
         columnTitle = new TableColumn<>();
-        columnTitle.setCellValueFactory(new MapValueFactory<>("title"));
+        columnTitle.setCellValueFactory(new MapValueFactory<>(KEY_OF_COLUMN_TITLE));
         columnTitle.setText("Title");
         columnTitle.setPrefWidth(200);
 
         columnDate = new TableColumn<>();
-        columnDate.setCellValueFactory(new MapValueFactory<>("date"));
+        columnDate.setCellValueFactory(new MapValueFactory<>(KEY_OF_COLUMN_DATE));
         columnDate.setText("Deadline");
         columnDate.setPrefWidth(100);
 
@@ -117,7 +121,7 @@ public class AllNotesForm extends Application {
         btnBack = new Button();
         btnBack.setText("Back");
         btnBack.setLayoutX(25);
-        btnBack.setLayoutY(550);
+        btnBack.setLayoutY(650);
         btnBack.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -176,7 +180,7 @@ public class AllNotesForm extends Application {
     }
 
     private void selectedRow(Map note) {
-        String id = (String) note.get("id");
+        String id = (String) note.get(KEY_OF_COLUMN_ID);
         Note selectedNote = noteRepository.getSelectedNote(id);
         noteId = selectedNote.id();
         noteTitle = selectedNote.title();

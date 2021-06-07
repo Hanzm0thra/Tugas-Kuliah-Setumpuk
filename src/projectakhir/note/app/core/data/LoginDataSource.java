@@ -4,7 +4,16 @@ import projectakhir.note.app.core.data.login.LoginClient;
 import projectakhir.note.app.core.data.login.LoginResponse;
 
 public class LoginDataSource {
+
+    private static LoginDataSource INSTANCE;
+
     private LoginClient loginClient;
+
+    public static LoginDataSource getInstance(LoginClient loginClient) {
+        if (INSTANCE == null)
+            INSTANCE = new LoginDataSource(loginClient);
+        return INSTANCE;
+    }
 
     public LoginDataSource(LoginClient loginClient) {
         this.loginClient = loginClient;

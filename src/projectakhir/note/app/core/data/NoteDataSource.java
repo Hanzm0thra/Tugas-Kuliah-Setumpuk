@@ -7,7 +7,14 @@ import java.util.List;
 
 public class NoteDataSource {
 
+    private static NoteDataSource INSTANCE;
     private NoteDao noteDao;
+
+    public static NoteDataSource getInstance(NoteDao noteDao) {
+        if (INSTANCE == null)
+            INSTANCE = new NoteDataSource(noteDao);
+        return INSTANCE;
+    }
 
     public NoteDataSource(NoteDao noteDao) {
         this.noteDao = noteDao;

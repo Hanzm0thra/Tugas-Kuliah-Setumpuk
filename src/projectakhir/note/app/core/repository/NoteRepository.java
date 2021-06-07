@@ -14,12 +14,19 @@ import java.util.List;
 
 public class NoteRepository implements INoteRepository {
 
+    private static NoteRepository INSTANCE;
     private LoginDataSource loginDataSource;
     private NoteDataSource noteDataSource;
 
     public NoteRepository(LoginDataSource loginDataSource, NoteDataSource noteDataSource) {
         this.loginDataSource = loginDataSource;
         this.noteDataSource = noteDataSource;
+    }
+
+    public static NoteRepository getInstance(LoginDataSource loginDataSource, NoteDataSource noteDataSource) {
+        if (INSTANCE == null)
+            INSTANCE = new NoteRepository(loginDataSource, noteDataSource);
+        return INSTANCE;
     }
 
     @Override
@@ -34,7 +41,6 @@ public class NoteRepository implements INoteRepository {
             public LoginResponse call() {
                 return loginDataSource.getAccount(email, password);
             }
-
 
         }.asResult();
     }

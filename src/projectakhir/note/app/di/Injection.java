@@ -14,13 +14,13 @@ public class Injection {
 
     //Login
     public static LoginClient provideLoginDB = LoginBuilder.getInstance();
-    public static LoginDataSource provideLoginDataSource = new LoginDataSource(provideLoginDB);
+    public static LoginDataSource provideLoginDataSource = LoginDataSource.getInstance(provideLoginDB);
 
     //Note
     public static NoteDao provideNoteDB = NoteBuilder.getInstance();
-    public static NoteDataSource provideNoteDataSource = new NoteDataSource(provideNoteDB);
+    public static NoteDataSource provideNoteDataSource = NoteDataSource.getInstance(provideNoteDB);
 
     //Repository
-    public static INoteRepository provideNoteRepository = new NoteRepository(provideLoginDataSource, provideNoteDataSource);
+    public static INoteRepository provideNoteRepository = NoteRepository.getInstance(provideLoginDataSource, provideNoteDataSource);
 
 }

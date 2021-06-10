@@ -3,9 +3,9 @@ package projectakhir.note.app.core.data.login;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoginDB implements LoginClient{
+public class LoginDB implements LoginDao {
 
-    private List<LoginResponse> loginCollection = new ArrayList<>();
+    private List<LoginEntity> loginCollection = new ArrayList<>();
 
     public LoginDB() {
         addListOfUser();
@@ -13,7 +13,7 @@ public class LoginDB implements LoginClient{
 
     public void addListOfUser() {
         loginCollection.add(
-                new LoginResponse(
+                new LoginEntity(
                         "akunbaru@gmail.com",
                         "12345",
                         "Master Mail"
@@ -21,7 +21,7 @@ public class LoginDB implements LoginClient{
         );
 
         loginCollection.add(
-                new LoginResponse(
+                new LoginEntity(
                         "officialNote@gmail.com",
                         "12345",
                         "Official Note"
@@ -29,7 +29,7 @@ public class LoginDB implements LoginClient{
         );
 
         loginCollection.add(
-                new LoginResponse(
+                new LoginEntity(
                         "a",
                         "1",
                         "a"
@@ -37,24 +37,32 @@ public class LoginDB implements LoginClient{
         );
 
         loginCollection.add(
-                new LoginResponse(
+                new LoginEntity(
                         "usertest@gmail.com",
                         "testing123",
                         "user test"
                 )
         );
+
+        loginCollection.add(
+                new LoginEntity(
+                        "example@gmail.com",
+                        "example12345",
+                        "example user"
+                )
+        );
     }
 
     @Override
-    public LoginResponse getAccount(String email, String password) {
-        LoginResponse result = new LoginResponse(null, null, null);
+    public LoginEntity getAccount(String email, String password) {
+        LoginEntity result = new LoginEntity(null, null, null);
 
-        for (LoginResponse loginResponse : loginCollection) {
-            if (loginResponse.email().equals(email) && loginResponse.password().equals(password)) {
-                result = new LoginResponse(
-                        loginResponse.email(),
-                        loginResponse.password(),
-                        loginResponse.name()
+        for (LoginEntity loginEntity : loginCollection) {
+            if (loginEntity.email().equals(email) && loginEntity.password().equals(password)) {
+                result = new LoginEntity(
+                        loginEntity.email(),
+                        loginEntity.password(),
+                        loginEntity.name()
                 );
             }
         }
@@ -78,7 +86,7 @@ public class LoginDB implements LoginClient{
     public void register(String email, String password, String name) {
         if (!isEmailAlreadyExist(email) && !isNameAlreadyExist(name))
             loginCollection.add(
-                    new LoginResponse(
+                    new LoginEntity(
                             email,
                             password,
                             name
@@ -88,7 +96,7 @@ public class LoginDB implements LoginClient{
 
     @Override
     public String getName(String name) {
-        for (LoginResponse obj: loginCollection) {
+        for (LoginEntity obj: loginCollection) {
             if (obj.name().equals(name))
                 return name;
         }
@@ -97,7 +105,7 @@ public class LoginDB implements LoginClient{
 
     @Override
     public String getEmail(String email) {
-        for (LoginResponse obj: loginCollection) {
+        for (LoginEntity obj: loginCollection) {
             if (obj.email().equals(email))
                 return email;
         }

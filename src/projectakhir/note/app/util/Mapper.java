@@ -1,7 +1,7 @@
 package projectakhir.note.app.util;
 
 
-import projectakhir.note.app.core.data.login.LoginResponse;
+import projectakhir.note.app.core.data.login.LoginEntity;
 import projectakhir.note.app.core.data.note.NoteEntity;
 import projectakhir.note.app.model.Login;
 import projectakhir.note.app.model.Note;
@@ -11,11 +11,11 @@ import java.util.stream.Collectors;
 
 public class Mapper {
 
-    public static Login mappingLogin(LoginResponse loginResponse) {
+    public static Login mappingLogin(LoginEntity loginEntity) {
         return new Login(
-                loginResponse.email(),
-                loginResponse.password(),
-                loginResponse.name()
+                loginEntity.email(),
+                loginEntity.password(),
+                loginEntity.name()
         );
     }
 

@@ -8,10 +8,12 @@ module JavaFX.Projects {
     requires junit;
     requires org.junit.jupiter.api;
     requires jnanoid;
+    requires io.reactivex.rxjava2;
 
     opens sample;
     opens praktikumpbo10;
     opens praktikumpbo10.ui;
     opens projectakhir.note.app;
     opens projectakhir.note.app.ui;
+    opens projectakhir.note.test;
 }

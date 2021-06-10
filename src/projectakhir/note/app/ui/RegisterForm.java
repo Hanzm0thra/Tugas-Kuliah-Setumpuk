@@ -1,6 +1,9 @@
 package projectakhir.note.app.ui;
 
+import io.reactivex.Observable;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -32,14 +35,11 @@ public class RegisterForm extends Application {
     private Text txtErrorPassword;
     private Text txtErrorRePassword;
 
-    private Text txtAccountAvailable;
-
     private TextField tfUsername;
     private TextField tfEmail;
     private TextField tfPassword;
     private TextField tfRePassword;
 
-    private Button btnCheck;
     private Button btnRegister;
     private Button btnBack;
 
@@ -62,14 +62,11 @@ public class RegisterForm extends Application {
         initTextErrorPassword();
         initTextErrorRePassword();
 
-        initTextAccountAvailable();
-
         initTextFieldUsername();
         initTextFieldEmail();
         initTextFieldPassword();
         initTextFieldRePassword();
 
-        initButtonCheck();
         initButtonRegister(primaryStage);
         initButtonBack(primaryStage);
 
@@ -78,10 +75,10 @@ public class RegisterForm extends Application {
         VBox vBoxErrorComp = new VBox(28, txtErrorUsername, txtErrorEmail, txtErrorPassword, txtErrorRePassword);
 
         HBox hBoxRegisterFill = new HBox(35, vBoxTextComp, vBoxTextFieldComp, vBoxErrorComp);
-        HBox hBoxRegisterButton = new HBox(35, btnCheck, btnRegister, txtAccountAvailable);
+        HBox hBoxRegisterButton = new HBox(35, btnRegister);
 
         VBox vBoxLoginComp = new VBox(20, hBoxRegisterFill, hBoxRegisterButton);
-        vBoxLoginComp.setLayoutX(150);
+        vBoxLoginComp.setLayoutX(100);
         vBoxLoginComp.setLayoutY(200);
 
         Group root = new Group(txtRegister, vBoxLoginComp, btnBack);
@@ -89,12 +86,14 @@ public class RegisterForm extends Application {
         Scene scene = new Scene(root, 700, 700);
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        check();
     }
 
     private void initTextRegister() {
         txtRegister = new Text();
         txtRegister.setText("Register");
-        txtRegister.setLayoutX(250);
+        txtRegister.setLayoutX(350);
         txtRegister.setLayoutY(150);
         txtRegister.setFont(Font.font("Calibri", FontWeight.BOLD, 24));
     }
@@ -125,7 +124,6 @@ public class RegisterForm extends Application {
 
     private void initTextErrorUsername() {
         txtErrorUsername = new Text();
-        txtErrorUsername.setText("Username telah digunakan");
         txtErrorUsername.setFill(Color.RED);
         txtErrorUsername.setVisible(false);
         txtErrorUsername.setFont(Font.font("Calibri", FontPosture.REGULAR, 18));
@@ -133,7 +131,6 @@ public class RegisterForm extends Application {
 
     private void initTextErrorEmail() {
         txtErrorEmail = new Text();
-        txtErrorEmail.setText("Email telah digunakan");
         txtErrorEmail.setFill(Color.RED);
         txtErrorEmail.setVisible(false);
         txtErrorEmail.setFont(Font.font("Calibri", FontPosture.REGULAR, 18));
@@ -141,71 +138,61 @@ public class RegisterForm extends Application {
 
     private void initTextErrorPassword() {
         txtErrorPassword = new Text();
-        txtErrorPassword.setText("");
+        txtErrorPassword.setFill(Color.RED);
+        txtErrorPassword.setVisible(false);
+        txtErrorPassword.setFont(Font.font("Calibri", FontPosture.REGULAR, 18));
     }
 
     private void initTextErrorRePassword() {
         txtErrorRePassword = new Text();
-        txtErrorRePassword.setText("Password tidak sama");
         txtErrorRePassword.setFill(Color.RED);
         txtErrorRePassword.setVisible(false);
         txtErrorRePassword.setFont(Font.font("Calibri", FontPosture.REGULAR, 18));
     }
 
-    private void initTextAccountAvailable() {
-        txtAccountAvailable = new Text();
-        txtAccountAvailable.setText("Akun tersedia, silahkan registrasi");
-        txtAccountAvailable.setFill(Color.GREEN);
-        txtAccountAvailable.setVisible(false);
-        txtAccountAvailable.setFont(Font.font("Calibri", FontPosture.REGULAR, 18));
-    }
-
     private void initTextFieldUsername() {
         tfUsername = new TextField();
-        if (tfUsername.isFocused())
-            btnRegister.setDisable(true);
+        if (tfUsername.getText().isEmpty()) {
+            txtErrorUsername.setText("Field ini tidak boleh kosong");
+            txtErrorUsername.setVisible(true);
+        }
     }
 
     private void initTextFieldEmail() {
         tfEmail = new TextField();
-        if (tfEmail.isFocused())
-            btnRegister.setDisable(true);
+        if (tfEmail.getText().isEmpty()) {
+            txtErrorEmail.setText("Field ini tidak boleh kosong");
+            txtErrorEmail.setVisible(true);
+        }
     }
 
     private void initTextFieldPassword() {
         tfPassword = new TextField();
-        if (tfPassword.isFocused())
-            btnRegister.setDisable(true);
+        if (tfPassword.getText().isEmpty()) {
+            txtErrorPassword.setText("Field ini tidak boleh kosong");
+            txtErrorPassword.setVisible(true);
+        }
     }
 
     private void initTextFieldRePassword() {
         tfRePassword = new TextField();
-        if (tfRePassword.isFocused())
-            btnRegister.setDisable(true);
-    }
-
-    private void initButtonCheck() {
-        btnCheck = new Button();
-        btnCheck.setText("Check");
-        btnCheck.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                check();
-            }
-        });
+        if (tfRePassword.getText().isEmpty()) {
+            txtErrorRePassword.setText("Field ini tidak boleh kosong");
+            txtErrorRePassword.setVisible(true);
+        }
     }
 
     private void initButtonRegister(Stage stage) {
         btnRegister = new Button();
         btnRegister.setText("Register");
         btnRegister.setDisable(true);
+        btnRegister.setPrefSize(520, 50);
         btnRegister.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 String username = tfUsername.getText();
                 String email = tfEmail.getText();
                 String password = tfPassword.getText();
-                check();
                 LoginForm loginForm = new LoginForm();
                 noteRepository.register(email, password, username);
                 loginForm.start(stage);
@@ -228,47 +215,93 @@ public class RegisterForm extends Application {
     }
 
     private void check() {
-        boolean isUsernameFix = false;
-        boolean isEmailFix = false;
-        boolean isRePasswordFix = false;
 
-        String username = tfUsername.getText();
-        String email = tfEmail.getText();
-        String password = tfPassword.getText();
-        String rePassword = tfRePassword.getText();
+        tfUsername.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                   Observable.just(newValue)
+                           .map(value -> value.isEmpty() || noteRepository.isNameAlreadyExist(value))
+                           .subscribe(isNotValid -> showErrorUsername(isNotValid));
+            }
+        });
 
-        if (noteRepository.isNameAlreadyExist(username) || username.isEmpty()) {
-            txtErrorUsername.setVisible(true);
-            txtAccountAvailable.setVisible(false);
+
+        tfEmail.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                Observable.just(newValue)
+                        .map(value -> value.isEmpty() || noteRepository.isEmailAlreadyExist(value))
+                        .subscribe(isNotValid -> showErrorEmail(isNotValid));
+            }
+        });
+
+
+
+        tfPassword.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                Observable.just(newValue)
+                        .map(value -> value.isEmpty() || !value.equals(tfRePassword.getText()))
+                        .subscribe(isNotValid -> showErrorPassword(isNotValid));
+            }
+        });
+
+        tfRePassword.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                Observable.just(newValue)
+                        .map(value -> value.isEmpty() || !value.equals(tfPassword.getText()))
+                        .subscribe(isNotValid -> showErrorRePassword(isNotValid));
+            }
+        });
+    }
+
+    private void showErrorUsername(boolean isNotValid) {
+        if (tfUsername.getText().isEmpty())
+            txtErrorUsername.setText("Field ini tidak boieh kosong");
+        else
+            txtErrorUsername.setText("Username telah digunakan");
+        txtErrorUsername.setVisible(isNotValid);
+        checkButtonRegister();
+    }
+
+    private void showErrorEmail(boolean isNotValid) {
+        if (tfEmail.getText().isEmpty())
+            txtErrorEmail.setText("Field ini tidak boleh kosong");
+        else
+            txtErrorEmail.setText("Email telah digunakan");
+        txtErrorEmail.setVisible(isNotValid);
+        checkButtonRegister();
+    }
+
+    private void showErrorPassword(boolean isNotValid) {
+        if (tfPassword.getText().isEmpty()) {
+            txtErrorPassword.setText("Field ini tidak boleh kosong");
+            txtErrorPassword.setVisible(isNotValid);
         }
         else {
-            isUsernameFix = true;
-            txtErrorUsername.setVisible(false);
+            txtErrorRePassword.setText("Password tidak sama");
+            txtErrorRePassword.setVisible(isNotValid);
+            txtErrorPassword.setVisible(false);
         }
+        checkButtonRegister();
+    }
 
+    private void showErrorRePassword(boolean isNotValid) {
+        if (tfRePassword.getText().isEmpty())
+            txtErrorRePassword.setText("Field ini tidak boleh kosong");
+        else
+            txtErrorRePassword.setText("Password tidak sama");
+        txtErrorRePassword.setVisible(isNotValid);
+        checkButtonRegister();
+    }
 
-        if (noteRepository.isEmailAlreadyExist(email) || email.isEmpty()) {
-            txtAccountAvailable.setVisible(false);
-            txtErrorEmail.setVisible(true);
+    private void checkButtonRegister() {
+        if (txtErrorUsername.isVisible() || txtErrorEmail.isVisible() || txtErrorPassword.isVisible() || txtErrorRePassword.isVisible()) {
+            btnRegister.setDisable(true);
         }
         else {
-            isEmailFix = true;
-            txtErrorEmail.setVisible(false);
-        }
-
-        if (!password.equals(rePassword)) {
-            txtAccountAvailable.setVisible(false);
-            txtErrorRePassword.setVisible(true);
-        }
-        else {
-            isRePasswordFix = true;
-            txtErrorRePassword.setVisible(false);
-        }
-
-        if (isUsernameFix && isEmailFix && isRePasswordFix) {
             btnRegister.setDisable(false);
-            txtAccountAvailable.setVisible(true);
         }
-
     }
 }

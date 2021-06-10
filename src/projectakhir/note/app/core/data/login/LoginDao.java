@@ -1,8 +1,8 @@
 package projectakhir.note.app.core.data.login;
 
-public interface LoginClient {
+public interface LoginDao {
 
-    LoginResponse getAccount(String email, String password);
+    LoginEntity getAccount(String email, String password);
     boolean isEmailAlreadyExist(String email);
     boolean isNameAlreadyExist(String password);
     void register(String email, String password, String name);

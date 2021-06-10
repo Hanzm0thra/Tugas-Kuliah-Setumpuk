@@ -4,7 +4,7 @@ package projectakhir.note.app.core.repository;
 import projectakhir.note.app.core.data.LoginDataSource;
 import projectakhir.note.app.core.data.NoteDataSource;
 import projectakhir.note.app.core.data.Resource;
-import projectakhir.note.app.core.data.login.LoginResponse;
+import projectakhir.note.app.core.data.login.LoginEntity;
 import projectakhir.note.app.core.data.note.NoteEntity;
 import projectakhir.note.app.model.Login;
 import projectakhir.note.app.model.Note;
@@ -31,14 +31,14 @@ public class NoteRepository implements INoteRepository {
 
     @Override
     public Login getAccount(String email, String password) {
-        return new Resource<LoginResponse, Login>() {
+        return new Resource<LoginEntity, Login>() {
             @Override
-            public Login loadData(LoginResponse data) {
+            public Login loadData(LoginEntity data) {
                 return Mapper.mappingLogin(data);
             }
 
             @Override
-            public LoginResponse call() {
+            public LoginEntity call() {
                 return loginDataSource.getAccount(email, password);
             }
 

@@ -1,6 +1,6 @@
 package projectakhir.note.app.core.data.note;
 
-public class NoteBuilder extends NoteDB{
+public class NoteBuilder extends NoteDB {
 
     private static NoteBuilder INSTANCE;
 

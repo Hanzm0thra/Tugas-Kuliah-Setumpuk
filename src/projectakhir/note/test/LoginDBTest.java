@@ -10,11 +10,11 @@ import projectakhir.note.app.core.data.login.LoginDB;
 @RunWith(JUnit4.class)
 public class LoginDBTest {
 
-    private LoginDB loginDB;
+    private LoginDB loginDBImpl;
 
     @Before
     public void setup() {
-        loginDB = new LoginDB();
+        loginDBImpl = new LoginDB();
     }
 
     @Test
@@ -33,27 +33,27 @@ public class LoginDBTest {
 
 
     private void accountExist(String email, String password) {
-        if (loginDB.getAccount(email, password).email() == null)
-            Assertions.assertNull(loginDB.getAccount(email, password).email());
+        if (loginDBImpl.getAccount(email, password).email() == null)
+            Assertions.assertNull(loginDBImpl.getAccount(email, password).email());
         else
-            Assertions.assertEquals(email, loginDB.getAccount(email, password).email());
+            Assertions.assertEquals(email, loginDBImpl.getAccount(email, password).email());
     }
 
     private void isEmailExist(String email) {
-        if (loginDB.isEmailAlreadyExist(email))
-            Assertions.assertEquals(email, loginDB.getEmail(email));
+        if (loginDBImpl.isEmailAlreadyExist(email))
+            Assertions.assertEquals(email, loginDBImpl.getEmail(email));
         else
-            Assertions.assertNull(loginDB.getEmail(email));
+            Assertions.assertNull(loginDBImpl.getEmail(email));
     }
 
     private void isNameExist(String name) {
-        if (loginDB.isNameAlreadyExist(name))
-            Assertions.assertEquals(name, loginDB.getName(name));
+        if (loginDBImpl.isNameAlreadyExist(name))
+            Assertions.assertEquals(name, loginDBImpl.getName(name));
         else
-            Assertions.assertNull(loginDB.getName(name));
+            Assertions.assertNull(loginDBImpl.getName(name));
     }
 
     private void register(String email, String password, String name) {
-        loginDB.register(email, password, name);
+        loginDBImpl.register(email, password, name);
     }
 }

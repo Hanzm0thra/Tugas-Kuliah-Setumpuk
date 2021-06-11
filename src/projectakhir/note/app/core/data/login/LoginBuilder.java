@@ -1,11 +1,15 @@
 package projectakhir.note.app.core.data.login;
 
 public class LoginBuilder extends LoginDB {
-    private static LoginDB INSTANCE;
+    private static LoginBuilder INSTANCE;
 
-    public static LoginDB getInstance() {
+    LoginBuilder() {
+        super();
+    }
+
+    public static LoginBuilder getInstance() {
         if (INSTANCE == null)
-            INSTANCE = new LoginDB();
+            INSTANCE = new LoginBuilder();
         return INSTANCE;
     }
 }

@@ -42,7 +42,7 @@ public class AllNotesForm extends Application {
     private String noteAuthor;
 
     private final INoteRepository noteRepository = Injection.provideNoteRepository;
-    ObservableList<Map<String, Object>> items = FXCollections.<Map<String, Object>>observableArrayList();
+    private ObservableList<Map<String, Object>> items = FXCollections.<Map<String, Object>>observableArrayList();
 
     public static void main(String[] args) {
         launch(args);

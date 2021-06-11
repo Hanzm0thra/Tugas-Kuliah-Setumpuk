@@ -87,7 +87,7 @@ public class RegisterForm extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        check();
+        observeCheck();
     }
 
     private void initTextRegister() {
@@ -214,7 +214,7 @@ public class RegisterForm extends Application {
         });
     }
 
-    private void check() {
+    private void observeCheck() {
 
         tfUsername.textProperty().addListener(new ChangeListener<String>() {
             @Override

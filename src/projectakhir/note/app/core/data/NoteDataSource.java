@@ -10,14 +10,14 @@ public class NoteDataSource {
     private static NoteDataSource INSTANCE;
     private NoteDao noteDao;
 
+    public NoteDataSource(NoteDao noteDao) {
+        this.noteDao = noteDao;
+    }
+
     public static NoteDataSource getInstance(NoteDao noteDao) {
         if (INSTANCE == null)
             INSTANCE = new NoteDataSource(noteDao);
         return INSTANCE;
-    }
-
-    public NoteDataSource(NoteDao noteDao) {
-        this.noteDao = noteDao;
     }
 
     public void insert(String title, String content, String date, String author) {

@@ -8,8 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -193,8 +192,13 @@ public class RegisterForm extends Application {
                 String username = tfUsername.getText();
                 String email = tfEmail.getText();
                 String password = tfPassword.getText();
-                LoginForm loginForm = new LoginForm();
                 noteRepository.register(email, password, username);
+                Dialog<String> dialog = new Dialog<>();
+                ButtonType btnOK = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+                dialog.getDialogPane().getButtonTypes().add(btnOK);
+                dialog.setContentText("Registrasi berhasil, silahkan login");
+                dialog.showAndWait();
+                LoginForm loginForm = new LoginForm();
                 loginForm.start(stage);
             }
         });

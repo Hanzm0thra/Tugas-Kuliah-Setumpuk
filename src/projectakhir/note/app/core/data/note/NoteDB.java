@@ -8,10 +8,26 @@ import java.util.List;
 public class NoteDB implements NoteDao {
 
     private List<NoteEntity> notes = new ArrayList<>();
+    public String env = "production";
 
     @Override
     public void insert(String title, String content, String date, String author) {
-        String id = NanoIdUtils.randomNanoId();
+
+        String id = null;
+        if (env.equals("production"))
+            id = NanoIdUtils.randomNanoId();
+        else if (env.equals("test")) {
+            int _id = 0;
+
+            if (notes.size() == 0)
+                _id = 1;
+            else {
+                int size = notes.size() - 1;
+                _id = Integer.parseInt(notes.get(size).id()) + 1;
+            }
+            id = Integer.toString(_id);
+        }
+
         notes.add(new NoteEntity(
                 id,
                 title,

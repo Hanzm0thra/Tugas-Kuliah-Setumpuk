@@ -1,8 +1,8 @@
 package projectakhir.note.test;
 
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import projectakhir.note.app.core.data.note.NoteDB;
@@ -16,6 +16,7 @@ public class NoteDBTest {
     @Before
     public void setup() {
         testNoteDBImpl = new NoteDB();
+        testNoteDBImpl.env = "test";
     }
 
     private void insertNote() {
